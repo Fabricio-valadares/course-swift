@@ -1,8 +1,8 @@
 # idwall-swift
 
-+-- classroom-01
-    +-- array
-    +-- condicionais
-    +-- dicionarios
-    +-- operadores
-    +-- variareis 
+classroom-01
++-- array
++-- condicionais
++-- dicionarios
++-- operadores
++-- variareis 
