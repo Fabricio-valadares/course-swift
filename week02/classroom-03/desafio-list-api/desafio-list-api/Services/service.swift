@@ -19,7 +19,7 @@ protocol ServiceProtocol {
 
 class Service: ServiceProtocol {
     let session = URLSession.shared
-    let url = "https://storage.gama.academy/R5Jc4N7KBxaKFKXinX65syRBW6yG6mnfNH5rAiX9mUbi5"
+    let url = "https://run.mocky.io/v3/f0c36709-84e2-4043-a0f0-3bec512f6c84"
     
     static var shared: Service = {
         let instance = Service()
@@ -39,7 +39,6 @@ class Service: ServiceProtocol {
                 
                 let decoder = JSONDecoder()
                 
-//                print(try decoder.decode(Card.self, from: json), "???>>>>>")
                 
                 let cardResponse = try decoder.decode([Card].self, from: json)
                 

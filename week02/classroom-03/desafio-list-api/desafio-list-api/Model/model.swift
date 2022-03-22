@@ -9,7 +9,7 @@ import Foundation
 
 struct Card: Codable {
     let id: Int
-    let profile: String
+    let photo: String
     let name: String
     let company: CompanyData
 }

@@ -8,10 +8,16 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
     
-    var dataCardApi: [Card] = []
+    lazy var dataCardApi = [Card]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,39 +29,46 @@ class ViewController: UIViewController {
     func delegate() {
         tableView.delegate = self
         tableView.dataSource = self
+        
+        tableView.isHidden = true
+        
     }
-
+    
     func getDataApi() {
         Service.shared.getByDataCard { [self] result in
             switch result {
             case .success(let res):
-                print(res)
+
                 self.dataCardApi = res
+                
+                DispatchQueue.main.async {
+                    self.tableView.isHidden = false
+                }
             case .failure(let error):
                 print(error)
             }
         }
     }
-
+    
 }
 
 extension ViewController: UITableViewDelegate {}
 
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataCardApi.count
+        return self.dataCardApi.count
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell else { return UITableViewCell() }
+        guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell else { return UITableViewCell() }
         
-        let dataFinal = dataCardApi[indexPath.row]
+        let dataFinal = self.dataCardApi[indexPath.row]
         
-        guard let imageUrl = URL(string: dataFinal.profile) else { return UITableViewCell()}
-        
-        cell.setup(image: imageUrl, title: dataFinal.name, description: dataFinal.company.name)
-
+        cell.setup(image: dataFinal.photo, title: dataFinal.name, description: dataFinal.company.name)
         
         return cell
     }
 }
+
+

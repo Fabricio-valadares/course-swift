@@ -65,7 +65,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="Description" destination="gVC-9v-jzl" id="nUD-IX-j7P"/>
+                                            <outlet property="DescriptionV" destination="gVC-9v-jzl" id="iCN-Eh-Gpp"/>
                                             <outlet property="ImageV" destination="YUJ-U5-BxV" id="YDt-v8-Fpo"/>
                                             <outlet property="TitleV" destination="e37-rP-2WY" id="4TF-VA-der"/>
                                         </connections>
